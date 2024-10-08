@@ -1,3 +1,4 @@
+# See design.md
 # Fabric Example Mod
 
 ## Setup
