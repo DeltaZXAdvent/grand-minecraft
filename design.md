@@ -33,6 +33,7 @@ But if you find it fun, you can help me implement it.
 	Items will drop but mobs are more able to acquire them!
   - Mobs should spawn everywhere not always distant to the player
   - There are different kinds of mobs to counter players' strategies
+	- [ ] Zombies
     - Zombies are the basic mob with different types of speed, some may not take knockback
     - Spiders can get high, maybe give some spiders a high jump
     - Shields cannot be used, shield is boring, maybe delete skeletons because slow projectiles are then
@@ -48,3 +49,17 @@ But if you find it fun, you can help me implement it.
 - The progress system in the overworld:
   - Armors should be less, but restoration could be more complex and poisons
   - An eternal light source should be found at some challenging dark place
+
+| Monster | Speed           | Knockback | Description                  |
+|---------|-----------------|-----------|------------------------------|
+| Zombie  | slow, walk, run | None      | Close-range counter-player   |
+| Creeper | slow            | None      | Close-range counter-building |
+
+# Features to implement
+- LivingEntity modification
+  - [x] Speed getter setter
+  - [ ] Knockback
+
+# Java IDE functionalities implemented for Emacs
+- Flymake
+- Find definitions -- just use a tag tool

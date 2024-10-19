@@ -14,13 +14,18 @@ import net.minecraft.world.World;
 import net.minecraft.entity.SpawnGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
+import net.minecraft.util.Identifier;
+import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.client.render.entity.model.SkeletonEntityModel;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+
 public class GSkeletonEntity extends SkeletonEntity {
     public GSkeletonEntity (EntityType<? extends SkeletonEntity> entityType, World world) {
 	super (entityType, world);
-	this.setMovementSpeed (this.getMovementSpeed () * 2);
+	this.setMovementSpeed (this.getMovementSpeed () * 1.5f);
     }
     @Override
     protected int getRegularAttackInterval () {
-	return super.getRegularAttackInterval () / 2;
+	return super.getRegularAttackInterval () / 8;
     }
 }

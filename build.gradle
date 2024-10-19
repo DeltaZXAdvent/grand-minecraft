@@ -19,12 +19,12 @@ repositories {
 }
 
 loom {
-	splitEnvironmentSourceSets()
+	// splitEnvironmentSourceSets()
 
 	mods {
 		"modid" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
+			// sourceSet sourceSets.main
+			// sourceSet sourceSets.client
 		}
 	}
 
@@ -61,13 +61,10 @@ java {
 
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
-<<<<<<< HEAD
 	
 	// toolchain {
 	// 	  languageVersion = JavaLanguageVersion.of(17)
 	// }
-=======
->>>>>>> d2da576 (rebase using github main branch?)
 }
 
 jar {
@@ -92,12 +89,8 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
-<<<<<<< HEAD
 }
 
 // compileJava {
 // 	    options.compilerArgs << '-Duser.language=en -Duser.region=US'
 // }
-=======
-}
->>>>>>> d2da576 (rebase using github main branch?)
