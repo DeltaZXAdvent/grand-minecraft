@@ -55,6 +55,16 @@ But if you find it fun, you can help me implement it.
 | Zombie  | slow, walk, run | None      | Close-range counter-player   |
 | Creeper | slow            | None      | Close-range counter-building |
 
+## Combat system
+- Player: HP 5
+- Close-range mobs
+  - slow speed HP 2 ATK 1, no knockback
+  - middle speed HP 1 ATK 1
+  - high speed HP 1 ATK 2
+- Counter-structure mobs
+  - slow speed HP 3 ATK 1 for mobs 2 for player, noisy, no knockback
+  - explosive, chain ignition
+
 # Features to implement
 - LivingEntity modification
   - [x] Speed getter setter

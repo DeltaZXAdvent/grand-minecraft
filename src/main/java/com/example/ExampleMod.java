@@ -2,6 +2,7 @@ package com.example;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.entity.mob.CreeperEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,47 +40,55 @@ public class ExampleMod implements ModInitializer {
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final EntityType<GSkeletonEntity> GSKELETON =
-	Registry.register(Registries.ENTITY_TYPE,
-			  Identifier.of (MOD_ID, "gskeleton"),
-			  EntityType.Builder.create (GSkeletonEntity::new, SpawnGroup.MONSTER).build ("gskeleton"));
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MOD_ID, "gskeleton"),
+                    EntityType.Builder.create(GSkeletonEntity::new, SpawnGroup.MONSTER).build("gskeleton"));
     public static final EntityType<GZombieEntity> GZOMBIE =
-	Registry.register(Registries.ENTITY_TYPE,
-			  Identifier.of (MOD_ID, "gzombie"),
-			  EntityType.Builder.create (GZombieEntity::new, SpawnGroup.MONSTER).build ("gzombie"));
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MOD_ID, "gzombie"),
+                    EntityType.Builder.create(GZombieEntity::new, SpawnGroup.MONSTER).build("gzombie"));
+    public static final EntityType<GCreeperEntity> GCREEPER =
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MOD_ID, "gcreeper"),
+                    EntityType.Builder.create(GCreeperEntity::new, SpawnGroup.MONSTER).build("gcreeper"));
+
     @Override
     public void onInitialize() {
-	// This code runs as soon as Minecraft is in a mod-load-ready state.
-	// However, some things (like resources) may still be uninitialized.
-	// Proceed with mild caution.
-	LOGGER.info("Hello Fabric world!");
-	FabricDefaultAttributeRegistry.register(GSKELETON, GSkeletonEntity.createMobAttributes());
-	FabricDefaultAttributeRegistry.register(GZOMBIE, GZombieEntity.createZombieAttributes());
-	// DONE find a proper way to remove, register and spawn entities
-	ServerEntityEvents.ENTITY_LOAD.register ((entity, world) -> {
-		MobEntity newEntity = null;
-		// switch (entity.getClass ()) {
-		// case SkeletonEntity.class:
-		//     newEntity = GSKELETON.create (world);
-		// case ZombieEntity.class:
-		//     newEntity = GZOMBIE.create (world);
-		// }
-		if (entity instanceof SkeletonEntity && !(entity instanceof GSkeletonEntity))
-		    newEntity = GSKELETON.create (world);
-		else if (entity instanceof ZombieEntity && !(entity instanceof GZombieEntity))
-		    newEntity = GZOMBIE.create (world);
-		if (newEntity == null) {
-		    // LOGGER.error ("");
-		    return;
-		}
-		BlockPos pos = entity.getBlockPos ();
-		newEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.NATURAL, null);
-		newEntity.refreshPositionAndAngles(pos, 0.0F, 0.0F);
-		world.spawnEntityAndPassengers(newEntity);
-		// gskeletonEntity.initialize (world, world.get)
-		// gs.refreshPositionAndAngles(entity.getX(), entity.getY(), entity.getZ(), entity.getYaw (), entity.getPitch ());
-		// world.spawnEntity(gs);
-		entity.discard();
-	    });
+        // This code runs as soon as Minecraft is in a mod-load-ready state.
+        // However, some things (like resources) may still be uninitialized.
+        // Proceed with mild caution.
+        LOGGER.info("Hello Fabric world!");
+        FabricDefaultAttributeRegistry.register(GSKELETON, GSkeletonEntity.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(GZOMBIE, GZombieEntity.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(GCREEPER, GCreeperEntity.createCreeperAttributes());
+        // DONE find a proper way to remove, register and spawn entities
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            MobEntity newEntity = null;
+            // switch (entity.getClass ()) {
+            // case SkeletonEntity.class:
+            //     newEntity = GSKELETON.create (world);
+            // case ZombieEntity.class:
+            //     newEntity = GZOMBIE.create (world);
+            // }
+            if (entity instanceof SkeletonEntity && !(entity instanceof GSkeletonEntity))
+                newEntity = GSKELETON.create(world);
+            else if (entity instanceof ZombieEntity && !(entity instanceof GZombieEntity))
+                newEntity = GZOMBIE.create(world);
+            else if (entity instanceof CreeperEntity && !(entity instanceof GCreeperEntity))
+                newEntity = GCREEPER.create(world);
+            if (newEntity == null) {
+                // LOGGER.error ("");
+                return;
+            }
+            BlockPos pos = entity.getBlockPos();
+            newEntity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.NATURAL, null);
+            newEntity.refreshPositionAndAngles(pos, 0.0F, 0.0F);
+            world.spawnEntityAndPassengers(newEntity);
+            // gskeletonEntity.initialize (world, world.get)
+            // gs.refreshPositionAndAngles(entity.getX(), entity.getY(), entity.getZ(), entity.getYaw (), entity.getPitch ());
+            // world.spawnEntity(gs);
+            entity.discard();
+        });
     }
 
     // public class GSkeletonEntityRenderer extends MobEntityRenderer<GSkeletonEntity, GSkeletonEntityModel> {

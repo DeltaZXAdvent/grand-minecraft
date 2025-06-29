@@ -22,10 +22,10 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 public class GSkeletonEntity extends SkeletonEntity {
     public GSkeletonEntity (EntityType<? extends SkeletonEntity> entityType, World world) {
 	super (entityType, world);
-	this.setMovementSpeed (this.getMovementSpeed () * 1.5f);
+	this.setMovementSpeed (this.getMovementSpeed () * 0.75f);
     }
     @Override
     protected int getRegularAttackInterval () {
-	return super.getRegularAttackInterval () / 8;
+	return (int) (super.getRegularAttackInterval () / 32f);
     }
 }
